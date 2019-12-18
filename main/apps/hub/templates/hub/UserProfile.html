@@ -1,0 +1,226 @@
+{% extends './base.html' %} {% load static %} {% block content %}
+<!--================Home Banner Area =================-->
+<section class="banner_area ">
+  <div class="banner_inner overlay d-flex align-items-center">
+    <div class="container">
+      <div class="banner_content">
+        <div class="page_link">
+        </div>
+        <h2>User Profile</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<div class="user-profile-main container">
+  <div class="row">
+    <div class="col-sm-12 col-md-3 container">
+      <div class="user-card">
+        <div class="container card-header">
+          <img
+            id="user-card-img-top"
+            src="{{ user.image.url }}"
+            alt="Card image cap"
+          />
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>
+              <button
+                type="button"
+                class="btn btn-sm btn-light"
+                data-toggle="modal"
+                data-target="#userPicModal"
+              >
+                add Profile Photo
+              </button>
+            </li>
+            <li>
+              <p id="name" class="display-4">
+                {{ request.session.data.firstName }}
+              </p>
+            </li>
+            <li><a href="#" class="link">Your Property</a></li>
+            <li>
+              <a href="{% url 'hub:profile' %}" class="link">Edit Profile</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="user-card">
+        <div class="card-header">Quick Links</div>
+        <div class="card-body">
+          <ul>
+            <li>
+              <a href="{% url 'hub:profile' %}" class="link">View Trips</a>
+            </li>
+            <li>
+              <a href="{% url 'hub:profile' %}" class="link">Saved Listings</a>
+            </li>
+            <li>
+              <a href="{% url 'hub:becomeHost' %}" class="link"
+                >Become a Host</a
+              >
+            </li>
+          </ul>
+          {% if request.session.data.id == 1 %}
+          <ul>
+            <li>
+              <a href="{% url 'listing:fillamenities' %}" class="link"
+                >fill amenities</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'listing:filllistings' %}" class="link"
+                >fill listings</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'user:fillusers' %}" class="link">fill users</a>
+            </li>
+            <li>
+              <a href="{% url 'review:fill_reviews' %}" class="link"
+                >fill reviews</a
+              >
+            </li>
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-0 col-md-9 container">
+      <div class="message-header">
+        <div class="card-header">
+          Your Listings ({{ listings.count }})
+        </div>
+      </div>
+      {% if listings %}
+      <div class="user-card message-column">
+        {% for listing in listings %}
+        <div class="card-body review">
+          <div class="review-list flex-container">
+            <div>
+              <div class="mini-location-img-box inline">
+                <img
+                  class="location-mini-img"
+                  src="{{ listing.main_photo.url }}"
+                  alt="listing main img"
+                />
+              </div>
+              <div class="review-mini-info inline">
+                <h6>{{ listing.name }}</h6>
+                <p style="margin-bottom: .2rem;">{{ listing.listing_type }}</p>
+                <p>{{ listing.created_at|date:"F Y" }}</p>
+              </div>
+            </div>
+            <div class="listing-button">
+              <a href="/{{ listing.id }}/userListingProfile"
+                ><button class="btn rausch-bg ">View Details</button></a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="message-header">
+        <div class="card-header">
+          Your Future Trips ({{ future_trips.count }})
+        </div>
+      </div>
+      {% if future_trips %}
+      <div class="user-card message-column">
+        {% for trip in future_trips %}
+        <div class="card-body review">
+          <div class="review-list flex-container">
+            <div>
+              <div class="mini-location-img-box inline">
+                <img
+                  class="location-mini-img"
+                  src="{{ trip.listing.main_photo.url }}"
+                  alt="listing main img"
+                />
+              </div>
+              <div class="review-mini-info inline">
+                <h6>{{ trip.name }}</h6>
+                <p style="margin-bottom: .2rem;">{{ trip.listing.name }}</p>
+                <p>{{ trip.start_date|date:"F d" }} - {{ trip.end_date }}</p>
+              </div>
+            </div>
+            <div class="listing-button">
+              <a href="/{{ trip.listing.id }}/listingdetails"
+                ><button class="btn rausch-bg ">View Details</button></a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="message-header">
+        <div class="card-header">
+          Your Past Trips ({{ past_trips.count }})
+        </div>
+      </div>
+      {% if past_trips %}
+      <div class="user-card message-column">
+        {% for trip in past_trips %}
+        <div class="card-body review">
+          <div class="review-list flex-container">
+            <div>
+              <div class="mini-location-img-box inline">
+                <img
+                  class="location-mini-img"
+                  src="{{ trip.listing.main_photo.url }}"
+                  alt="listing main img"
+                />
+              </div>
+              <div class="review-mini-info inline">
+                <h6>{{ trip.name }}</h6>
+                <p style="margin-bottom: .2rem;">{{ trip.listing.name }}</p>
+                <p>{{ trip.start_date|date:"F d" }} - {{ trip.end_date }}</p>
+              </div>
+            </div>
+            <div class="listing-button">
+              <a href="/{{ trip.listing.id }}/listingdetails"
+                ><button class="btn rausch-bg ">Rate this Trip</button></a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="message-header">
+        <div class="card-header">
+          Your Reviews ({{ reviews.count }})
+        </div>
+      </div>
+      {% if reviews %}
+      <div class="user-card message-column">
+        {% for review in reviews %}
+        <div class="card-body review">
+          <div class="review-list">
+            <div class="mini-img-box inline">
+              <img
+                class="review-mini-img"
+                src="{{ review.user.image.url }}"
+                alt="profile img"
+              />
+            </div>
+            <div class="review-mini-info inline">
+              <h6>{{ review.user.firstName }}</h6>
+              <p>{{ review.created_at|date:"F Y" }}</p>
+            </div>
+          </div>
+          <p class="review-mini-content">{{ review.content }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% include 'hub/userPictureModal.html' %} {% endblock %}

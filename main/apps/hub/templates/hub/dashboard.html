@@ -1,0 +1,67 @@
+{% extends './base.html' %} {% load static %} {% block content %}
+<!--================Home Banner Area =================-->
+<section class="banner_area ">
+    <div class="banner_inner overlay d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content">
+          <div class="page_link">
+
+          </div>
+          <h2>Trip Packages</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+     
+            
+                    
+
+        <!-- </div> -->
+        <section class="package-area section_gap_top">
+            <div class="container">
+              <div class="row d-flex justify-content-center">
+                <div class="ol-lg-12">
+                  <div class="main_title">
+                    <p>We’re Offering these Trip Packages</p>
+                    <h1>Famous Trips Packages</h1>
+                    <span class="title-widget-bg"></span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                    {% for listing in listings %}
+                    <!-- <div class="row"> -->
+                <div class="col-lg-4 col-md-6">
+                  <div class="single-package">
+                        <a href="/{{ listing.id }}/listingdetails">
+                    <div class="thumb">
+                      <img
+                        class="img-fluid"
+                        src="{{ listing.main_photo.url }}"
+                        alt=""
+                      />
+                    </div>
+                    <p class="date">
+                      Rating
+                      <span>{{ listing.rating }}</span> <br />
+                      Star
+                    </p>
+                    <div class="meta-top d-flex">
+                      <p><span class="fa fa-location-arrow"></span> {{ listing.listing_type }}</p>
+                      <p class="ml-20">
+                        <span class="fa fa-calendar"></span> {{ listing.name }}s
+                      </p>
+                    </div>
+                    <p class="card-text">${{ listing.price }} per night</p>
+                                <p class="card-text"></p>
+                            {{ listing.reviews.count }}</p>
+                            </div>
+                        </div></a>          
+                {% endfor %}
+                </div>
+              </div>
+          </section>
+          <!--================ End Trip Package Area =================-->
+{% endblock %}

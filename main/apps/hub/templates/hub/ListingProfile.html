@@ -1,0 +1,213 @@
+{% extends './base.html' %} {% load static %} {% load humanize %} {%load
+bootstrap4%} {%block content%}
+<!--================Home Banner Area =================-->
+<section class="banner_area ">
+  <div class="banner_inner overlay d-flex align-items-center">
+    <div class="container">
+      <div class="banner_content">
+        <div class="page_link">
+
+        </div>
+        <h2>Package</h2>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Home Banner Area =================-->
+<div class="site-section">
+  <div class="container" style="padding-top: 50px;">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{ listing.main_photo.url }}" alt="Image" class="img-fluid" />
+        <!-- Start Review ------------------ -->
+        <hr class="listing">
+        <div>
+            <h5>{{ reviews.count }} Reviews  
+                    {% for i in range %}
+                        {% if listing.rating >= i %}
+                            <!-- <span class="greentext"><i class="fas fa-star"></i></span> -->
+                        {% elif listing.rating > i %}
+                        <!-- <span class="greentext"><i class="fas fa-star-half"></i> -->
+                        {% endif %}
+                    {% endfor %}
+        </div>
+        <hr class="listing">
+        <div>
+            {% if reviews %}
+                {% for review in reviews %}
+                <div class="review-list">
+                    <div class="mini-img-box inline">
+                        <img class="review-mini-img" src="{{ review.user.image.url }}" alt="profile img">
+                    </div>
+                    <div class="review-mini-info inline">
+                        <h6>{{ review.user.firstName }}</h6>    
+                        <p>{{ review.created_at|date:"F Y" }}</p>
+                    </div>
+                    <p class="review-mini-content">{{ review.content }}</p>
+                </div>
+                <hr class="listing">
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="flex-container">
+            <div>
+                <h4 class="hosted-by">Hosted by {{ listing.host.firstName }}</h4>
+                <p class="no-margin">{{ listing.city }}, {{ listing.state }} <span>&#x02022;</span> Joined in {{ listing.host.created_at|date:"F Y" }}</p>
+            </div>
+            <div class="mini-host-box">
+                <img class="review-mini-img" src="{{ listing.host.image.url }}" alt="profile img">
+            </div>
+        </div>
+            <a class="getModal greentext" data-toggle="modal" href="#messageModal">contact host</a>
+        <hr class="listing">
+        <div class="map">
+        {% if 'id' in request.session.data %}
+            <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#ReviewModal">
+                <h6 class="red-text">Write a Review of this Property</h6>
+              </button>
+        {% endif %}
+        </div>
+        <hr>
+            <!-- <footer id="filter-submit-footer" class="flex-container fixed-bottom">
+                <div>
+                    <div class="">
+                        <h4 class="inline no-margin">${{ listing.price }}</h4>
+                        <p class="inline no-margin">per night</p>
+                    </div>
+                    <div>
+                     <p>
+                            {% for i in range %}
+                            {% if listing.rating >= i %}
+                                <span class="greentext"><i class="fas fa-star"></i></span>
+                            {% elif listing.rating > i %}
+                                <span class="greentext"><i class="fas fa-star-half"></i></span>
+                            {% endif %}
+                        {% endfor %}
+                    {{ listing.reviews.count }}</p> >
+                    <p>
+                        {% for i in range %}
+                            {% if listing.rating >= i %}
+                                <span class="greentext inline">&#9733</span>                     
+                            {% endif %}
+                        {% endfor %}
+                    {{ listing.reviews.count }}</p >
+                
+
+                    </div>
+                 </div>
+               
+            </footer> -->
+        
+        <!-- End Review -------------------- -->
+      </div>
+      <div class="col-md-6">
+        <h2 class="text-black">{{ listing.name }}</h2>
+
+        <p class="mb-4">{{ listing.listing_type }}</p>
+        <p>
+          <strong class="text-primary h4"
+            >{{ listing.city }}, {{ listing.state }}</strong
+          >
+        </p>
+        <div class="container">
+          <div class="col">
+            <p class="mb-4">{{ listing.guests }} guests</p>
+            <p class="mb-4">{{ listing.bedrooms }} bedroom</p>
+          </div>
+
+          <div class="col">
+            <p class="mb-4">{{ listing.beds }} bed</p>
+            <p class="mb-4">{{ listing.bathrooms }}bathrooms</p>
+          </div>
+        </div>
+        <hr class="listing" />
+        <div>
+          <p>HOME HIGHLIGHTS</p>
+          <p>
+            <span><strong>Great location</strong></span> this home is located
+            right in the middle of a great neighborhood. Walkable and safe.
+          </p>
+          <p>
+            <span><strong>Self check-in</strong></span> Easily check yourself in
+            with the lockbox.
+          </p>
+        </div>
+        <hr class="listing" />
+        <div>
+          <p>{{ listing.description }}</p>
+          <!-- <a class="link" data-toggle="collapse" data-target="#space-more" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><p class="greentext">Read more about the space  &#x022C1;</p></a>
+            <div class="collapse" id="space-more">
+                <p>The space</p>
+                <p>blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</p>
+            </div> -->
+          <a class="getModal greentext" data-toggle="modal" href="#messageModal"
+            >contact host</a
+          >
+        </div>
+        <hr class="listing" />
+        <div>
+          <h6 class="">Amenities</h6>
+          {% if amenities %} {% for amenity in amenities %}
+          <p>{{ amenity.name }}</p>
+          {% endfor %} {% endif %}
+        </div>
+        <h4 class="inline no-margin">${{ listing.price }}</h4>
+        <p class="inline no-margin">per night</p>
+
+        <div class="mb-5">
+          <div class="input-group mb-3" style="max-width: 120px;">
+            <div class="input-group-prepend">
+              <button
+                class="btn btn-outline-primary js-btn-minus"
+                type="button"
+              >
+                &minus;
+              </button>
+            </div>
+            <input
+              type="text"
+              class="form-control text-center"
+              value="1"
+              placeholder=""
+              aria-label="Example text with button addon"
+              aria-describedby="button-addon1"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary js-btn-plus" type="button">
+                &plus;
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn end-button rausch-bg" data-toggle="modal" data-target="#tripDateModal" href="https://rzp.io/l/NdyqmPM"> Book</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% include 'hub/ReviewModal.html' %} {% include 'hub/tripDateModal.html' %}
+{%endblock%} {% block scripts %}
+<script>
+  $().daterangepicker();
+
+  $('input[name="daterange"]').daterangepicker(
+    {
+      startDate: moment(),
+      endDate: "05/30/2019"
+    },
+    function(start, end, label) {
+      console.log(
+        "New date range selected: " +
+          start.format("YYYY-MM-DD") +
+          " to " +
+          end.format("YYYY-MM-DD") +
+          " (predefined range: " +
+          label +
+          ")"
+      );
+    }
+  );
+</script>
+{% endblock scripts %}

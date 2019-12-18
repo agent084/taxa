@@ -1,0 +1,394 @@
+
+{% extends './base.html' %} 
+{% load static %}
+
+    {% block content %} 
+<!--================Home Banner Area =================-->
+<section class="banner_area ">
+        <div class="banner_inner overlay d-flex align-items-center">
+          <div class="container">
+            <div class="banner_content">
+              <div class="page_link">
+              </div>
+              <h2>Join Us</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--================End Home Banner Area =================-->
+      
+      <!--================Join Us Area =================-->
+      <section class="feature-area section_gap_top">
+              <div class="container">
+                  <div class="row align-items-end justify-content-left">
+                      <div class="col-lg-12">
+                          <div class="main_title">
+                              <!-- <p>We’re Offering these Popular Services</p> -->
+                              <h1>Why Join Us?</h1>
+                              <span class="title-widget-bg"></span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <!-- single-feature -->
+                      <div class="col-lg-4 col-md-6">
+                          <div class="single-feature">
+                              <div class="feature-details">
+                                  <h5>Host and earn </h5>
+                                 
+                                  <!-- <a href="#" class="primary-btn mb-40">Read More</a> -->
+                              </div>
+                              <div class="feature-thumb">
+                                  <img class="img-fluid" src="{% static 'img/service/s1.png' %}" alt="">
+                              </div>
+                          </div>
+                      </div>
+                      <!-- single-feature -->
+                      <div class="col-lg-4 col-md-6">
+                          <div class="single-feature">
+                              <div class="feature-details">
+                                  <h5>Become an integral part of <br>
+                                      Travel community around the world </h5>
+                                  <!-- <p>
+                                      Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                  </p> -->
+                                  <!-- <a href="#" class="primary-btn mb-40">Read More</a> -->
+                              </div>
+                              <div class="feature-thumb">
+                                  <img class="img-fluid" src="{% static 'img/service/s2.png' %}" alt="">
+                              </div>
+                          </div>
+                      </div>
+                      <!-- single-feature -->
+                      <div class="col-lg-4 col-md-6">
+                          <div class="single-feature">
+                              <div class="feature-details">
+                                  <h5>Work in a fun and safe environment</h5>
+                                  <!-- <p>
+                                      Lorem ipsum dolor sit amet, consecter adipisicing elit, sed do eiusmod tempor incididunt.
+                                  </p> -->
+                                  <!-- <a href="#" class="primary-btn mb-40">Read More</a> -->
+                              </div>
+                              <div class="feature-thumb">
+                                  <img class="img-fluid" src="{% static 'img/service/s3.png' %}" alt="">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      <!--================Join Us Area =================-->
+
+      <div class="main_title">
+            <!-- <p>We’re Offering these Popular Services</p> -->
+            <h1>Join Us now</h1>
+            <span class="title-widget-bg"></span>
+        </div>
+
+      
+<!-- <div class="col-md" style="align-self: center; padding-left: 20%; padding-right: 20%; padding-top: 40px;"> -->
+    {% if "id" in request.session.data %}
+    <div id="small-filters-main" class="main">
+        <form class="form" action="{% url 'listing:newListing' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <p>Listing Name</p>
+                <input type="text" class="form-control" name="name" value="" placeholder="" required>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" name="address" placeholder="1234 Main St" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <label for="inputCity">City</label>
+                <input type="text" class="form-control" name="city" required>
+                </div>
+                <div class="form-group col-md-4">
+                <label for="inputState" >State</label>
+                <select name="state" class="form-control" >
+                    <option selected>Choose...</option>
+                    <option>Alabama</option>
+                    <option>Alaska</option>
+                    <option>Arizona</option>
+                    <option>Arkansas</option>
+                    <option>California</option>
+                    <option>Colorado</option>
+                    <option>Connecticut</option>
+                    <option>Delaware</option>
+                    <option>District of Columbia</option>
+                    <option>Florida</option>
+                    <option>Georgia</option>
+                    <option>Hawaii</option>
+                    <option>Idaho</option>
+                    <option>Illinois</option>
+                    <option>Indiana</option>
+                    <option>Iowa</option>
+                    <option>Kansas</option>
+                    <option>Kentucky</option>
+                    <option>Louisiana</option>
+                    <option>Maine</option>
+                    <option>Maryland</option>
+                    <option>Massachusetts</option>
+                    <option>Michigan</option>
+                    <option>Minnesota</option>
+                    <option>Mississippi</option>
+                    <option>Missouri</option>
+                    <option>Montana</option>
+                    <option>Nebraska</option>
+                    <option>Nevada</option>
+                    <option>New Hampshire</option>
+                    <option>New Jersey</option>
+                    <option>New Mexico</option>
+                    <option>New York</option>
+                    <option>North Carolina</option>
+                    <option>North Dakota</option>
+                    <option>Ohio</option>
+                    <option>Oklahoma</option>
+                    <option>Oregon</option>
+                    <option>Pennsylvania</option>
+                    <option>Rhode Island</option>
+                    <option>South Carolina</option>
+                    <option>South Dakota</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Utah</option>
+                    <option>Vermont</option>
+                    <option>Virginia</option>
+                    <option>Washington</option>
+                    <option>West Virginia</option>
+                    <option>Wisconsin</option>
+                    <option>Wyoming</option>
+                </select>
+                </div>
+                <div class="form-group col-md-2">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" name="zip">
+                </div>
+            </div>
+            <hr class="small-screen">
+
+            <div class="hometype">
+                <p class="first-filter-title">Property Type</p>
+                <div>
+                    <ul>
+                        <li>
+                            <input type="checkbox" class="home-type" name="homeType" value="ENITRE PLACE" checked>
+                            <label for="">Entire place</label>
+                            <p>Have a place to yourself</p>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="home-type" name="homeType" value="PRIVATE ROOM">
+                            <label for="">Private room</label>
+                            <p>Have your own room and share some common spaces</p>
+                        </li>
+                        <li>
+                            <input type="checkbox" class="home-type" name="homeType" value="SHARED ROOM">
+                            <label for="">Shared room</label>
+                            <p>Stray in a shared space, like a common room</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="small-screen">
+            <div class="guests">
+                <p>Guests</p>
+                <ul>
+                    <li class="flex-container">
+                        <p>Max Guests</p>
+                        <div>
+                            <input type="hidden" id="guestsinput" name="maxguests" value="1">
+                            <button type="button" id="guest-">&lt</button>
+                            <span id="guests">1</span>
+                            <button type="button" id="guestup">&gt</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <hr class="small-screen">
+            <div class="roomtype">
+                <p>Rooms and beds </p>
+                <ul>
+                    <li class="flex-container">
+                        <p>Beds</p>
+                        <div>
+                            <input type="hidden" id="bedsinput" name="beds" value="0">
+                            <button type="button" id="bed-">&lt</button>
+                            <span id="beds">0</span>
+                            <button type="button" id="bedup">&gt</button>
+                        </div>
+                    </li>
+                    <li class="flex-container">
+                        <p>Bedrooms</p>
+                        <div>
+                            <input type="hidden" id="bedroomsinput" name="bedrooms" value="0">
+                            <button type="button" id="bedroom-">&lt</button>
+                            <span id="bedrooms">0</span>
+                            <button type="button" id="bedroomup">&gt</button>
+                        </div>
+                    </li>
+                    <li class="flex-container">
+                        <p>Bathrooms</p>
+                        <div>
+                            <input type="hidden" id="bathroomsinput" name="bathrooms" value="0">
+                            <button type="button" id="bathroom-">&lt</button>
+                            <span id="bathrooms">0</span>
+                            <button type="button" id="bathroomup">&gt</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <hr class="small-screen">
+            <p>Amenities</p>
+            <div class="amenities">
+                <div class="flex-container">
+                    <a class="link" data-toggle="collapse" data-target="#amenity-options" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Show all amenities &#x022C1;</a>
+                </div>
+                <div class="collapse" id="amenity-options">
+                    <ul>
+                        <li></li><input type="checkbox" name="amenities1" value="Kitchen">Kitchen</li>
+                        <li></li><input type="checkbox" name="amenities2" value="Patio or Balcony">Patio or Balcony</li>
+                        <li></li><input type="checkbox" name="amenities3" value="Free Parking">Free Parking</li>
+                        <li></li><input type="checkbox" name="amenities4" value="Washer/Dryer">Washer/Dryer</li>
+                        <li></li><input type="checkbox" name="amenities5" value="Wifi">Wifi</li>
+                        <li></li><input type="checkbox" name="amenities6" value="TV">TV</li>
+                        <li></li><input type="checkbox" name="amenities7" value="Private Entrance">Private Entrance</li>
+                        <li></li><input type="checkbox" name="amenities8" value="Air Conditioning">Air Conditioning</li>
+                        <li></li><input type="checkbox" name="amenities9" value="Outdoor Grill">Outdoor Grill</li>
+                        <li></li><input type="checkbox" name="amenities10" value="Coffee Maker">Coffee Maker</li>
+                        <li></li><input type="checkbox" name="amenities11" value="Fireplace">Fireplace</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="small-screen">
+            <div class="form-group">
+                <p>Description</p>
+                <textarea type="text" class="form-control" name="description" value="" placeholder="" rows="3"></textarea>
+            </div>
+            <div></div>  
+            <hr class="hr-works">
+            <!-- Range Slider -->
+            <p>Price</p>
+            <div>
+                <div style="padding-bottom: 10px;">
+                    <input id="price-input" type="text" name="price" class="form-control" required>       
+                </div>
+            </div>
+            <input type="hidden" name="host" value="{{ request.session.data.id }}">
+            <div id="filter-submit-footer">
+                <button type="submit" class="btn btn-block">Create Listing</button>
+            </div>
+        </form> 
+    </div>
+<!-- </div> -->
+{% else %}
+<!--================Home Banner Area =================-->
+<section class="banner_area ">
+        <div class="banner_inner overlay d-flex align-items-center">
+          <div class="container">
+            <div class="banner_content">
+              <div class="page_link">
+            
+              </div class="abc">
+                                  <a
+                      class="nav-link loginModalLink getModal"
+                      data-toggle="modal"
+                      href="#loginModal"
+                      ><h2><center>Login to Continue</center></h2></a
+                    >
+              
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--================End Home Banner Area =================-->
+{% endif %}
+
+{% endblock  %}
+
+{% block scripts %}
+    <script>
+    $('.home-type').click(function(e) {
+    $('.home-type').not(this).prop('checked', false);
+});
+
+let guests = 1;
+let beds = 0;
+let bedrooms = 0;
+let bathrooms = 0;
+
+$('#guest-').click(function(e) {
+    console.log("down");
+    if (guests > 1) {
+        guests--;
+        $('#guests').text(guests);
+        $('#guestsinput').attr('value', guests);
+    }
+});
+$('#guestup').click(function(e) {
+    console.log("down");
+    if (guests < 10) {
+        guests++;
+        $('#guests').text(guests);
+        $('#guestsinput').attr('value', guests);
+    }
+});
+$('#bed-').click(function(e) {
+    console.log("down");
+    if (beds > 0) {
+        beds--;
+        $('#beds').text(beds);
+        $('#bedsinput').attr('value', beds);
+    }
+});
+
+$('#bedup').click(function(e) {
+    console.log("up");
+    if (beds < 8) {
+        beds++;
+        $('#beds').text(beds);
+        $('#beds').attr('value');
+        $('#bedsinput').attr('value', beds);
+    }
+});
+
+$('#bedroom-').click(function(e) {
+    console.log("down");
+    if (bedrooms > 0) {
+        bedrooms--;
+        $('#bedrooms').text(bedrooms);
+        $('#bedroomsinput').attr('value', bedrooms);
+    }
+});
+
+$('#bedroomup').click(function(e) {
+    console.log("up");
+    if (bedrooms < 8) {
+        bedrooms++;
+        $('#bedrooms').text(bedrooms);
+        $('#bedrooms').attr('value');
+        $('#bedroomsinput').attr('value', bedrooms);
+    }
+});
+
+$('#bathroom-').click(function(e) {
+    console.log("down");
+    if (bathrooms > 0) {
+        bathrooms--;
+        $('#bathrooms').text(bathrooms);
+        $('#bathroomsinput').attr('value', bathrooms);
+    }
+});
+
+$('#bathroomup').click(function(e) {
+    console.log("up");
+    if (bathrooms < 8) {
+        bathrooms++;
+        $('#bathrooms').text(bathrooms);
+        $('#bathroomsinput').attr('value', bathrooms);
+    }
+});
+
+
+    </script>
+{% endblock scripts %}
